@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Point.h"
 
 using namespace std;
@@ -13,10 +12,12 @@ int main(int argc, char** argv) {
     cout<<"pp1( "<<pp1->getX()<<","<<pp1->getY()<<")"<<endl;
     cout<<"pp2( "<<pp2->getX()<<","<<pp2->getY()<<")"<<endl;
     pp1->print();
-    cout << pp1->distance(*pp1,*pp2) <<endl;
+    cout << distance(*pp1,*pp2) <<endl;
     pp1->testIsSquare("points.txt");
     Point* arrayOfPoints = pp1->createArray(10);
     arrayOfPoints->printArray(arrayOfPoints, 10);
+    pair<Point, Point> pointof = closestPoints(arrayOfPoints, 10);
+    cout << pointof.first.getX() << " " << pointof.first.getY() << " " << pointof.second.getX() << " " << pointof.second.getY() << " " << distance(pointof.first, pointof.second);
     delete[] arrayOfPoints;
     delete pp1;
     delete pp2;

@@ -1,16 +1,11 @@
 // Point.cpp - implementáció
-#include <iostream>
-#include <sstream>
 #include "Point.h"
-#include <algorithm>
-#include <cmath>
-#include <fstream>
-
-using namespace std;
 
 double random_num(int min, int max){
     return rand() % (max - min) + min;
 }
+
+
 
 Point::Point(int x, int y) {
     if (x >= 0 && x <= 2000 && y >= 0 && y <= 2000){
@@ -34,7 +29,7 @@ void Point::print() const {
     cout << "x:" << getX() << " y:" << getY() <<endl;;
 }
 
-double Point::distance(const Point& a, const Point& b){
+double distance(const Point& a, const Point& b){
     double dis = 0;
     double dx = b.getX() - a.getX();
     double dy = b.getY() - a.getY();
@@ -121,4 +116,19 @@ void Point::printArray(Point* points, int numPoints){
     for(int i =0 ; i < numPoints; ++i){
         cout << "Point x:"<<points[i].getX() << " y:" << points[i].getY() << endl;
     }
+}
+
+pair<Point, Point> closestPoints(Point* points, int numPoints){
+    pair<Point, Point> max;
+    max.first = points[0];
+    max.second = points[1];
+    for(int i = 1; i < numPoints-1; ++i){
+        for(int j = i+1; j < numPoints; ++j){
+            if(distance(max.first, max.second) > distance(points[i], points[j])){
+                max.first = points[i];
+                max.second = points[j];
+            }
+        }
+    }
+    return max;
 }
