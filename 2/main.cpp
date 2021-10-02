@@ -14,7 +14,7 @@ int main(int argc, char** argv) {
     cout<<"pp2( "<<pp2->getX()<<","<<pp2->getY()<<")"<<endl;
     pp1->print();
     cout << pp1->distance(*pp1,*pp2) <<endl;
-    Point::testIsSquare("points.txt");
+    pp1->testIsSquare("points.txt");
     delete pp1;
     delete pp2;
     return 0;
