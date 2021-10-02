@@ -3,6 +3,9 @@
 using namespace std;
 
 int main(int argc, char** argv) {
+
+    srand(time(NULL));
+    
     Point p1(2,3);
     cout<<"p1( "<<p1.getX()<<","<<p1.getY()<<")"<<endl;
     Point p2(100, 200);
@@ -17,6 +20,8 @@ int main(int argc, char** argv) {
     Point* arrayOfPoints = pp1->createArray(10);
     arrayOfPoints->printArray(arrayOfPoints, 10);
     pair<Point, Point> pointof = closestPoints(arrayOfPoints, 10);
+    cout << pointof.first.getX() << " " << pointof.first.getY() << " " << pointof.second.getX() << " " << pointof.second.getY() << " " << distance(pointof.first, pointof.second)<<endl;
+    pointof = farthestPoints(arrayOfPoints, 10);
     cout << pointof.first.getX() << " " << pointof.first.getY() << " " << pointof.second.getX() << " " << pointof.second.getY() << " " << distance(pointof.first, pointof.second);
     delete[] arrayOfPoints;
     delete pp1;

@@ -24,4 +24,5 @@ using namespace std;
     };
 double distance(const Point& a, const Point& b);
 pair<Point, Point> closestPoints(Point* points, int numPoints);
+pair<Point, Point> farthestPoints(Point* points, int numPoints);
 #endif /* PONT_H */

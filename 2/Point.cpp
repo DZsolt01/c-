@@ -122,9 +122,23 @@ pair<Point, Point> closestPoints(Point* points, int numPoints){
     pair<Point, Point> max;
     max.first = points[0];
     max.second = points[1];
-    for(int i = 1; i < numPoints-1; ++i){
+    for(int i = 0; i < numPoints-1; ++i){
         for(int j = i+1; j < numPoints; ++j){
             if(distance(max.first, max.second) > distance(points[i], points[j])){
+                max.first = points[i];
+                max.second = points[j];
+            }
+        }
+    }
+    return max;
+}
+pair<Point, Point> farthestPoints(Point* points, int numPoints){
+    pair<Point, Point> max;
+    max.first = points[0];
+    max.second = points[1];
+    for(int i = 0; i < numPoints-1; ++i){
+        for(int j = i+1; j < numPoints; ++j){
+            if(distance(max.first, max.second) < distance(points[i], points[j])){
                 max.first = points[i];
                 max.second = points[j];
             }
