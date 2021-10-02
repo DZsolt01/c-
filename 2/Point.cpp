@@ -8,6 +8,10 @@
 
 using namespace std;
 
+double random_num(int min, int max){
+    return rand() % (max - min) + min;
+}
+
 Point::Point(int x, int y) {
     if (x >= 0 && x <= 2000 && y >= 0 && y <= 2000){
         this->x = x;
@@ -100,5 +104,21 @@ void Point::testIsSquare(const char * filename){
     {
         std::cerr << e.what() << '\n';
     }
-    
+}
+Point* Point::createArray(int numPoints) {
+    Point *points = new Point[numPoints];
+
+    if(!points){
+        cout << "ERROR" << endl;
+        return nullptr;
+    }
+    for(int i = 0; i < numPoints; ++i){
+        points[i] = Point(random_num(0,2000), random_num(0,2000));
+    }
+    return points;
+}
+void Point::printArray(Point* points, int numPoints){
+    for(int i =0 ; i < numPoints; ++i){
+        cout << "Point x:"<<points[i].getX() << " y:" << points[i].getY() << endl;
+    }
 }

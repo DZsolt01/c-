@@ -15,6 +15,9 @@ int main(int argc, char** argv) {
     pp1->print();
     cout << pp1->distance(*pp1,*pp2) <<endl;
     pp1->testIsSquare("points.txt");
+    Point* arrayOfPoints = pp1->createArray(10);
+    arrayOfPoints->printArray(arrayOfPoints, 10);
+    delete[] arrayOfPoints;
     delete pp1;
     delete pp2;
     return 0;

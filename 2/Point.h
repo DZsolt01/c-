@@ -10,5 +10,7 @@
     double distance(const Point& a, const Point& b);
     bool isSquare(const Point& a, const Point& b, const Point& c, const Point& d);
     void testIsSquare(const char * filename);
+    Point* createArray(int numPoints);
+    void printArray(Point* points, int numPoints);
     };
 #endif /* PONT_H */
