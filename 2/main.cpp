@@ -28,7 +28,8 @@ int main(int argc, char** argv) {
     cout << endl << "..." << endl;
     Point* arraysort = farthestPointsFromOrigin(arrayOfPoints, 10);
     arraysort->printArray(arraysort, 10);
-    delete[] arrayOfPoints;
+    deletePoints(arrayOfPoints);
+    deletePoints(arraysort);
     delete pp1;
     delete pp2;
     return 0;

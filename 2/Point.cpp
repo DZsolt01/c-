@@ -178,3 +178,7 @@ Point* farthestPointsFromOrigin(Point* points, int numPoints){
     }
     return res;
 }
+
+void deletePoints(Point* points){
+    delete[] points;
+}
