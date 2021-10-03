@@ -23,6 +23,11 @@ int main(int argc, char** argv) {
     cout << pointof.first.getX() << " " << pointof.first.getY() << " " << pointof.second.getX() << " " << pointof.second.getY() << " " << distance(pointof.first, pointof.second)<<endl;
     pointof = farthestPoints(arrayOfPoints, 10);
     cout << pointof.first.getX() << " " << pointof.first.getY() << " " << pointof.second.getX() << " " << pointof.second.getY() << " " << distance(pointof.first, pointof.second);
+    sortPoints(arrayOfPoints, 10);
+    arrayOfPoints->printArray(arrayOfPoints, 10);
+    cout << endl << "..." << endl;
+    Point* arraysort = farthestPointsFromOrigin(arrayOfPoints, 10);
+    arraysort->printArray(arraysort, 10);
     delete[] arrayOfPoints;
     delete pp1;
     delete pp2;

@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <iostream>
 #include <sstream>
+#include <map>
 
 using namespace std;
 #ifndef POINT_H
@@ -25,4 +26,6 @@ using namespace std;
 double distance(const Point& a, const Point& b);
 pair<Point, Point> closestPoints(Point* points, int numPoints);
 pair<Point, Point> farthestPoints(Point* points, int numPoints);
+void sortPoints(Point* points, int numPoints);
+Point* farthestPointsFromOrigin(Point* points, int numPoints);
 #endif /* PONT_H */

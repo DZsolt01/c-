@@ -146,3 +146,35 @@ pair<Point, Point> farthestPoints(Point* points, int numPoints){
     }
     return max;
 }
+
+bool comparex(Point const & p1, Point const& p2){
+    if(p1.getX() > p2.getX()){
+        return 1;
+    }
+    if(p1.getX() < p2.getX()){
+        return 0;
+    }
+    return -1;
+}
+
+void sortPoints(Point* points, int numPoints){
+    sort(points, points + numPoints, comparex);
+};
+
+Point* farthestPointsFromOrigin(Point* points, int numPoints){
+    map<double, Point> distances;
+    for(int i = 0; i < numPoints; ++i){
+        distances.insert(pair<double, Point>(distance(points[i], Point(0, 0)), points[i]));
+    }
+    map<double, Point>::iterator itr;
+    Point *res = new Point[10];
+    int i = 0;
+    for(itr = --distances.end(); itr != --distances.begin(); --itr){
+        res[i] = itr->second;
+        ++i;
+        if(i == 10){
+            break;
+        }
+    }
+    return res;
+}
