@@ -5,6 +5,7 @@
 #include <iostream>
 #include <sstream>
 #include <map>
+#include <ctime>
 
 using namespace std;
 #ifndef POINT_H
