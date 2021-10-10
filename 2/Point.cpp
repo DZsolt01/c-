@@ -148,13 +148,10 @@ pair<Point, Point> farthestPoints(Point* points, int numPoints){
 }
 
 bool comparex(Point const & p1, Point const& p2){
-    if(p1.getX() > p2.getX()){
-        return 1;
-    }
     if(p1.getX() < p2.getX()){
-        return 0;
+        return true;
     }
-    return -1;
+    return false;
 }
 
 void sortPoints(Point* points, int numPoints){

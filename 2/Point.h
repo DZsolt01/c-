@@ -5,13 +5,14 @@
 #include <iostream>
 #include <sstream>
 #include <map>
+#include <ctime>
 
 using namespace std;
 #ifndef POINT_H
     #define POINT_H
     class Point{
 
-    protected: int x, y;
+    private: int x, y;
     public: Point( int x=0, int y=0);
     int getX() const;
     int getY() const;
