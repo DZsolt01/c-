@@ -16,4 +16,10 @@ int main(){
     cout <<endl;
     a->remove(15, List::DeleteFlag::LESS);
     a->print();
+    a->~List();
+    a->print();
+
+
+    //STACK
+
 }
