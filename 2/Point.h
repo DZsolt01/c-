@@ -29,4 +29,5 @@ pair<Point, Point> farthestPoints(Point* points, int numPoints);
 void sortPoints(Point* points, int numPoints);
 Point* farthestPointsFromOrigin(Point* points, int numPoints);
 void deletePoints(Point* points);
+pair<Point, Point> closestPointsOptimized(Point* points, int numPoints);
 #endif /* PONT_H */

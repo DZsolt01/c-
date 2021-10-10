@@ -182,3 +182,16 @@ Point* farthestPointsFromOrigin(Point* points, int numPoints){
 void deletePoints(Point* points){
     delete[] points;
 }
+
+pair<Point, Point> closestPointsOptimized(Point* points, int numPoints){
+    pair<Point, Point> max;
+    max.first = points[0];
+    max.second = points[1];
+    map<double, pair<Point, Point>> distances;
+    for(int i = 0; i < numPoints-1; ++i){
+        for(int j = i+1; j < numPoints; ++j){
+            distances.insert(pair<double, pair<Point, Point>>(distance(points[i], points[j]), pair<Point, Point>(points[i], points[j])));
+        }
+    }
+    return max;
+}
