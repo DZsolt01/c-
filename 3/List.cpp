@@ -20,6 +20,7 @@ List::~List(){
 
 void List::insertFirst(int d){
     first = new Node(d, first);
+    nodeCounter++;
 };
 
 bool List::empty() const{
@@ -42,39 +43,37 @@ bool List::exists(int d) const{
 int List::size() const{
     return this->nodeCounter;
 }
-void List::remove(int d, DeleteFlag df = DeleteFlag::EQUAL){
+void List::remove(int d, DeleteFlag df){
     if(empty() ){
         throw runtime_error("Hiba tortent");
     }
-
-
     for(Node* p = first, *prev = first; p!= nullptr;){
-        Node* del = nullptr;
-        if(p == first){
-            del = first;
+        if(p == first && ((df == DeleteFlag::EQUAL && d == p->value) || (df == DeleteFlag::LESS && d < p->value) || (df == DeleteFlag::GREATER && d > p->value)) ){
+            Node* del = first;
             first = del->next;
             p = first;
             prev = p;
             delete del;
+            nodeCounter--;
         }
 
         else if(df == DeleteFlag::EQUAL && p->value == d){
-            del = p;
             prev->next = p->next;
-            p = p->next;
-            delete del;
+            delete p;
+            p = prev->next;
+            nodeCounter--;
         }
         else if(df == DeleteFlag::LESS && p->value > d){
-            del = p;
             prev->next = p->next;
-            p = p->next;
-            delete del;
+            delete p;
+            p = prev->next;
+            nodeCounter--;
         }
         else if(df == DeleteFlag::GREATER && p->value < d){
-            del = p;
             prev->next = p->next;
-            p = p->next;
-            delete del;
+            delete p;
+            p = prev->next;
+            nodeCounter--;
         }
         else{
             prev = p;
@@ -91,6 +90,7 @@ int List::removeFirst(){
     Node* p = first;
     first = first->next;
     delete p;
+    nodeCounter--;
     return x;
 }
 

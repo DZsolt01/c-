@@ -1,4 +1,7 @@
 #ifndef LIST_H
+
+using namespace std;
+#include <iostream>
 #define LIST_H
 class List
 {
