@@ -163,10 +163,9 @@ Point* farthestPointsFromOrigin(Point* points, int numPoints){
     for(int i = 0; i < numPoints; ++i){
         distances.insert(pair<double, Point>(distance(points[i], Point(0, 0)), points[i]));
     }
-    map<double, Point>::iterator itr;
     Point *res = new Point[10];
     int i = 0;
-    for(itr = --distances.end(); itr != --distances.begin(); --itr){
+    for(auto itr = distances.rbegin(); itr != distances.rend(); ++itr){
         res[i] = itr->second;
         ++i;
         if(i == 10){

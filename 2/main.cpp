@@ -34,9 +34,5 @@ int main(int argc, char** argv) {
     delete pp1;
     delete pp2;
 
-    //extra
-    int n = 100000;
-    Point* extra = extra->createArray(n);
-    pointof = closestPointsOptimized(extra, n);
     return 0;
 }

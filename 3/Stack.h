@@ -1,6 +1,7 @@
 #ifndef STACK_H
 
 using namespace std;
+#include "List.h"
 #include <iostream>
 #define STACK_H
 class Stack
@@ -35,6 +36,7 @@ to remove. The enum values are accessed with stack::DeleteFlag::LESS,
     Stack &operator=(const Stack &) = delete;
 
 private:
+    List list;
     /* number of nodes in the stack */
     int nodeCounter{0};
     /* a stack node */
