@@ -30,7 +30,7 @@ PointSet::PointSet(int n){
     this->n = n;
     srand(time(0));
     for(int i = 0; i < n; ++i){
-        points.emplace_back(Point(random_num(0, 1000), random_num(0, 1000)));
+        points.emplace_back(Point(random_num(0, 100000), random_num(0, 100000)));
     }
     computeDistances();
 }
