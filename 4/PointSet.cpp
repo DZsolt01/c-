@@ -27,6 +27,7 @@ bool compareDis(double const & d1, double const& d2){
 }
 
 PointSet::PointSet(int n){
+    this->n = n;
     srand(time(0));
     for(int i = 0; i < n; ++i){
         points.emplace_back(Point(random_num(0, 1000), random_num(0, 1000)));
