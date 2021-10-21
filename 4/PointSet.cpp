@@ -72,7 +72,8 @@ void PointSet::sortDistances(){
     sort(distances.begin(), distances.end(), compareDis);
 }
 int PointSet::numDistinctDistances(){
-    sortDistances();
+    vector<double> distances = this->distances;
+    sort(distances.begin(), distances.end());
     auto uniq = unique(distances.begin(), distances.end());
     return uniq - distances.begin();
 }
