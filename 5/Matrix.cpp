@@ -5,8 +5,8 @@ Matrix::Matrix(int rows, int cols){
     this->mRows = rows;
     this->mCols = cols;
     this->mElements = new double *[mRows];
-    for(int i = 0; i < rows; ++i){ 
-        mElements[i] = new double[cols];
+    for(int i = 0; i < rows; ++i){
+        this->mElements[i] = new double[cols];
     }
 }
 
@@ -34,11 +34,12 @@ Matrix::Matrix(const Matrix &copy){
 
 Matrix::Matrix(Matrix&& what)
 {
-    this -> mRows = what.mRows;
-    this -> mCols = what.mCols;
-    this -> mElements = what.mElements;
-    what.mElements = nullptr;
+    this->mRows = what.mRows;
+    this->mCols = what.mCols;
+    this->mElements = what.mElements;
     what.mRows = 0;
+    what.mCols = 0;
+    what.mElements = nullptr;
 }
 
 void Matrix::fillMatrix(double value){
@@ -84,7 +85,7 @@ Matrix operator+(const Matrix &x, const Matrix &y){
 }
 
 Matrix operator*(const Matrix &x, const Matrix &y){
-    if(x.mRows != y.mRows || x.mCols != y.mCols){
+    if(x.mRows != y.mCols){
         throw out_of_range("Nem megfelelo dimenziok!");
     }
     Matrix result(x.mRows, x.mCols);
