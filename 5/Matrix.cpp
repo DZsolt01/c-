@@ -1,4 +1,5 @@
 #include "Matrix.h"
+#include <ctime>
 
 Matrix::Matrix(int rows, int cols){
     this->mRows = rows;
@@ -29,6 +30,15 @@ Matrix::Matrix(const Matrix &copy){
             mElements[i][j] = copy.mElements[i][j];
         }
     }
+}
+
+Matrix::Matrix(Matrix&& what)
+{
+    this -> mRows = what.mRows;
+    this -> mCols = what.mCols;
+    this -> mElements = what.mElements;
+    what.mElements = nullptr;
+    what.mRows = 0;
 }
 
 void Matrix::fillMatrix(double value){
@@ -62,7 +72,7 @@ void Matrix::printMatrix(ostream &os) const{
 
 Matrix operator+(const Matrix &x, const Matrix &y){
     if(x.mRows != y.mRows || x.mCols != y.mCols){
-        throw runtime_error("Nem osszeadhato matrixok");
+        throw out_of_range("Nem osszeadhato matrixok");
     }
     Matrix result(x.mRows, x.mCols);
     for(int i = 0; i < result.mRows; ++i){
@@ -139,14 +149,18 @@ Matrix &Matrix::operator=(Matrix &&copy){
 }
 double *Matrix::operator[](int index){
     if(index < 0 || index >= mRows){
-        throw runtime_error("Nem letezo index!");
+        throw out_of_range("Nem letezo index!");
     }
     return mElements[index];
 }
 
 double *Matrix::operator[](int index) const{
     if(index < 0 || index >= mRows){
-        throw runtime_error("Nem letezo index!");
+        throw out_of_range("Nem letezo index!");
     }
     return mElements[index];
+}
+
+bool Matrix::isSquare() const {
+    return false;
 }
