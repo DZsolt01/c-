@@ -1,8 +1,10 @@
 #include "PointSet.h"
 #include <iomanip>
+#include "Polynomial.h"
 
 
 int main(){
+    /*
     int n = 2;
     cout<<"Pontok\tMinTav\t MaxTav\t #tavolsagok\t#kulonbozotavolsagok"<<endl;
     cout<< fixed;
@@ -20,4 +22,20 @@ int main(){
     cout<<"#points: " <<Point::getCounter()<<endl;
     PointSet pset2(20);
     cout<<"#points: " <<Point::getCounter()<<endl;
+     */
+    double ps[] = {1,2,3};
+    double ps2[] = {1, 1, 1, 1 ,1 ,1};
+    Polynomial polinoms (3, ps);
+    polinoms.printPolynomial(cout);
+    cout << polinoms.degree() << endl;
+    cout << polinoms.evaluate(1);
+    cout << endl;
+    Polynomial pol = polinoms.derivative();
+    pol.printPolynomial(cout);
+    Polynomial pol2  = (polinoms + pol);
+    pol2.printPolynomial(cout);
+    Polynomial pol3 (6, ps2);
+    Polynomial pol4 = (pol3 - polinoms);
+    pol4.printPolynomial(cout);
+    cout << pol4;
 }

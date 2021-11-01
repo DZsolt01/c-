@@ -8,11 +8,17 @@
 //-->
 //0 3 1 2
 
+// 3 2 1
+// 1 2 3
+
 Polynomial::Polynomial(int degree, const double *coefficients) {
-    this->capacity = degree+1;
-    this->coefficients = new double [degree+1];
-    for(int i = 0; i < capacity; ++i){
-        this->coefficients[i] = coefficients[degree-i];
+    this->capacity = degree;
+    this->coefficients = new double [degree];
+
+    if(coefficients != nullptr){
+        for(int i = 0; i < capacity; ++i){
+            this->coefficients[i] = coefficients[degree - (i + 1)];
+        }
     }
 }
 
@@ -35,33 +41,38 @@ Polynomial::~Polynomial() {
 }
 
 int Polynomial::degree() const {
-    for(int i = capacity-1; i > 0; --i){
+    for(int i = capacity -1; i > 0; --i){
         if(coefficients[i] != 0){
             return i;
         }
     }
     return 0;
 }
-
+// 1 2 3 x^2 + 2x + 3 // 3 2 1
 double Polynomial::evaluate(double x) const {
     int deg = this->degree();
     double result = this->coefficients[deg];
-    for (int i = deg - 1; i >= 0; i--) {
+    for (int i = deg-1; i >= 0; i--) {
         result = result * x + this->coefficients[i];
     }
     return result;
 }
 
 Polynomial Polynomial::derivative() const {
-    auto *mCoefficients = new double [this->degree() - 1];
-    for(int i = 0, j = degree() - 1; i < degree() - 2; ++i, --j){
-        mCoefficients[i] = coefficients[i] * j + coefficients[i+1];
+    auto *mCoefficients = new double [this->degree()];
+
+    for(int i = degree(); i > 0; --i){
+        mCoefficients[i-1] = coefficients[i] * i;
     }
-    return {degree()-1, mCoefficients};
+
+    return {degree(), mCoefficients};
 }
 
 double Polynomial::operator[](int index) const {
-    return 0;
+    if(index < 0 || index > degree()){
+        throw out_of_range("Nincs ilyen index!");
+    }
+    return coefficients[index];
 }
 
 Polynomial operator-(const Polynomial &a) {
@@ -69,23 +80,66 @@ Polynomial operator-(const Polynomial &a) {
 }
 
 Polynomial operator +(const Polynomial &a, const Polynomial &b) {
-    Polynomial result(max(a.degree(), b.degree()), nullptr);
+    Polynomial result (max(a.capacity, b.capacity), nullptr);
+
     for (int i = 0; i < result.capacity; i++) {
-        result.coefficients[i] = a[i] + b[i];
+        if(a.degree() < i){
+            result.coefficients[i] = b[i];
+        }
+        else if(b.degree() < i){
+            result.coefficients[i] = a[i];
+        }
+        else{
+            result.coefficients[i] = a[i] + b[i];
+        }
     }
     return result;
 }
 
 Polynomial operator-(const Polynomial &a, const Polynomial &b) {
-    return Polynomial(0, nullptr);
+    Polynomial result (max(a.capacity, b.capacity), nullptr);
+
+    for (int i = 0; i < result.capacity; i++) {
+        if(a.degree() < i){
+            result.coefficients[i] = -b[i];
+        }
+        else if(b.degree() < i){
+            result.coefficients[i] = a[i];
+        }
+        else{
+            result.coefficients[i] = a[i] - b[i];
+        }
+    }
+    return result;
 }
 
 Polynomial operator*(const Polynomial &a, const Polynomial &b) {
-    return Polynomial(0, nullptr);
+    Polynomial result (max(a.capacity, b.capacity), nullptr);
+
+    for (int i = 0; i < result.capacity; i++) {
+        if(a.degree() < i){
+            result.coefficients[i] = b[i];
+        }
+        else if(b.degree() < i){
+            result.coefficients[i] = a[i];
+        }
+        else{
+            result.coefficients[i] = a[i] * b[i];
+        }
+    }
+    return result;
 }
 
 ostream &operator<<(ostream &out, const Polynomial &what) {
+    what.printPolynomial(out);
     return out;
+}
+
+void Polynomial::printPolynomial(ostream & os) const {
+    for(int i = degree(); i >= 0; --i){
+        os << coefficients[i] << "*x^" << i  << " + ";
+    }
+    os << endl;
 }
 
 

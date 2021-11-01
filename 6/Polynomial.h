@@ -1,6 +1,7 @@
 #ifndef POLYNOMIAL_H
 #define POLYNOMIAL_H
 #include <iostream>
+#include <stdexcept>
 using namespace std;
 class Polynomial {
 // Polinom együtthatói
@@ -19,6 +20,7 @@ public:
 // Polinom deriváltja
     Polynomial derivative() const;
     double operator[](int index) const;
+    void printPolynomial(ostream &) const;
     friend Polynomial operator -(const Polynomial &a);
     friend Polynomial operator +(const Polynomial &a, const Polynomial &b);
     friend Polynomial operator -(const Polynomial &a, const Polynomial &b);
