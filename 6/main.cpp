@@ -36,6 +36,7 @@ int main(){
     pol2.printPolynomial(cout);
     Polynomial pol3 (6, ps2);
     Polynomial pol4 = (pol3 - polinoms);
+    Polynomial pol5 = polinoms * polinoms;
     pol4.printPolynomial(cout);
-    cout << pol4;
+    cout << -pol4;
 }

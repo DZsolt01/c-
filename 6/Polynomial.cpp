@@ -69,7 +69,7 @@ Polynomial Polynomial::derivative() const {
 }
 
 double Polynomial::operator[](int index) const {
-    if(index < 0 || index > degree()){
+    if(index < 0 || index > capacity){
         throw out_of_range("Nincs ilyen index!");
     }
     return coefficients[index];
@@ -119,17 +119,18 @@ Polynomial operator-(const Polynomial &a, const Polynomial &b) {
 }
 
 Polynomial operator*(const Polynomial &a, const Polynomial &b) {
-    Polynomial result (max(a.capacity, b.capacity), nullptr);
+
+    int aDeg = a.degree();
+    int bDeg = b.degree();
+
+    Polynomial result (aDeg + bDeg, nullptr);
 
     for (int i = 0; i < result.capacity; i++) {
-        if(a.degree() < i){
-            result.coefficients[i] = b[i];
-        }
-        else if(b.degree() < i){
-            result.coefficients[i] = a[i];
-        }
-        else{
-            result.coefficients[i] = a[i] * b[i];
+        result.coefficients[i] = 0;
+    }
+    for (int i = 0; i <= aDeg; i++) {
+        for (int j = 0; j <= bDeg; j++) {
+            result.coefficients[i + j] = a[i] * b[j];
         }
     }
     return result;
