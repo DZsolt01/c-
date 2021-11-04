@@ -76,7 +76,12 @@ double Polynomial::operator[](int index) const {
 }
 
 Polynomial operator-(const Polynomial &a) {
-    return Polynomial(0, nullptr);
+    Polynomial result(a.capacity, nullptr);
+    for(int i = 0; i < a.capacity; ++i){
+        result.coefficients[i] = -a[i];
+    }
+
+    return result;
 }
 
 Polynomial operator +(const Polynomial &a, const Polynomial &b) {
