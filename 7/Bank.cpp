@@ -4,6 +4,10 @@
 
 #include "Bank.h"
 #include <algorithm>
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include <string>
 
 Bank::Bank(const string &name) {
     this->name = name;
@@ -47,10 +51,15 @@ void Bank::printCustomersAndAccounts(ostream &os) const {
 }
 
 vector<int> Bank::loadCustomers(const string &filename) {
+    ifstream MyReadFile("customers.txt");
     string line;
-    while( getline(cin, line) && !line.empty() ){
-
+    while (getline (MyReadFile, line)) {
+        istringstream ss(line);
+        // Output the text from the file
+        cout << "1";
     }
+
+    MyReadFile.close();
     return vector<int>();
 }
 

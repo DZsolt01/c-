@@ -3,6 +3,7 @@
 //
 #include "Account.h"
 #include "Customer.h"
+#include "Bank.h"
 
 int main() {
     /*
@@ -22,4 +23,9 @@ int main() {
     c.deleteAccount(0);
     cout <<endl;
     cout << c;
+    vector<int> v;
+
+    Bank b("Teszt");
+    b.loadCustomers("customers.txt");
+    b.printCustomers(cout);
 }
