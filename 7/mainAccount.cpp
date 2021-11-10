@@ -33,4 +33,6 @@ int main() {
     }
     cout <<endl;
     b.printCustomers(cout);
+    b.deleteCustomer(1);
+    b.printCustomers(cout);
 }
