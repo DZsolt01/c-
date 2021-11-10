@@ -15,7 +15,7 @@ Bank::Bank(const string &name) {
 
 int Bank::newCustomer(const string &firstName, const string &lastName) {
     this->customers.emplace_back(Customer(firstName, lastName));
-    return customers[customers.size()].getId();
+    return customers[customers.size()-1].getId();
 }
 
 bool Bank::deleteCustomer(int id) {
@@ -39,7 +39,7 @@ Customer &Bank::getCustomer(int id) {
 void Bank::printCustomers(ostream &os) const {
     os << "BANK NAME:" << name << endl;
     for(const Customer &customer:customers){
-        os << customer.getFirstName() << " " << customer.getLastName() <<endl;
+        os << customer.getId() << " "<< customer.getFirstName() << " " << customer.getLastName() <<endl;
     }
 }
 
@@ -61,8 +61,7 @@ vector<int> Bank::loadCustomers(const string &filename) {
                 string lastname;
                 ss >> lastname;
                 cout << firstname << " " << lastname << endl;
-                newCustomer(firstname, lastname);
-                ids.emplace_back(customers.size() -1);
+                ids.emplace_back(newCustomer(firstname, lastname));
             }
     }
 
