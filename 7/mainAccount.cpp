@@ -26,6 +26,11 @@ int main() {
     vector<int> v;
 
     Bank b("Teszt");
-    b.loadCustomers("customers.txt");
+    vector<int> ids = b.loadCustomers("customers.txt");
+    cout << "IDS:";
+    for(int & id : ids){
+        cout << id << " ";
+    }
+    cout <<endl;
     b.printCustomers(cout);
 }

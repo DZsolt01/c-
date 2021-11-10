@@ -37,9 +37,9 @@ Customer &Bank::getCustomer(int id) {
 }
 
 void Bank::printCustomers(ostream &os) const {
-    os << name << ":"<< endl;
+    os << "BANK NAME:" << name << endl;
     for(const Customer &customer:customers){
-        os << customer.getFirstName() << " " << customer.getLastName();
+        os << customer.getFirstName() << " " << customer.getLastName() <<endl;
     }
 }
 
@@ -51,15 +51,22 @@ void Bank::printCustomersAndAccounts(ostream &os) const {
 }
 
 vector<int> Bank::loadCustomers(const string &filename) {
-    ifstream MyReadFile("customers.txt");
+    vector<int> ids;
+    ifstream MyReadFile(filename);
     string line;
     while (getline (MyReadFile, line)) {
         istringstream ss(line);
-        // Output the text from the file
-        cout << "1";
+        string firstname;
+            while(ss >> firstname){
+                string lastname;
+                ss >> lastname;
+                cout << firstname << " " << lastname << endl;
+                newCustomer(firstname, lastname);
+                ids.emplace_back(customers.size() -1);
+            }
     }
 
     MyReadFile.close();
-    return vector<int>();
+    return ids;
 }
 
