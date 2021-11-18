@@ -7,6 +7,9 @@
 
 AppStore::AppStore(const string &filename) {
     ifstream MyReadFile(filename);
+    if(!MyReadFile){
+        throw runtime_error("ERROR!");
+    }
     string line;
     while (getline (MyReadFile, line)) {
         if(line.empty()){
@@ -40,14 +43,14 @@ void AppStore::print(ostream &out, const string& term) {
                 continue;
             }
         }
-        else if(app.getName().find(term)){
-            out << app<<endl;
+        else if(app.getName().find(term) != string::npos){
+            out << app << endl;
         }
-        else if(app.getCategory().find(term)){
-            out << app<<endl;
+        else if(app.getCategory().find(term) != string::npos){
+            out << app << endl;
         }
-        else if(app.getDeveloper().find(term)){
-            out << app<<endl;
+        else if(app.getDeveloper().find(term) != string::npos){
+            out << app << endl;
         }
     }
 }
@@ -79,7 +82,7 @@ Application AppStore::bestApp(bool freeOnly, int minVersion) {
 }
 
 void AppStore::remove(int belowRating) {
-    erase_if(applications, [belowRating] (Application& app){
+    erase_if(applications, [belowRating] (const Application& app){
         if(app.getRating() < belowRating){
             return true;
         }
@@ -88,21 +91,21 @@ void AppStore::remove(int belowRating) {
 }
 
 bool compareFree(const Application& app1, const Application& app2){
-    if(app1.getPrice() == 0 && app2.getPrice() != 0){
-        return false;
+    if(app2.getPrice() == 0 && app1.getPrice() != 0){
+        return true;
     }
-    if(app1.getPrice() == 0 && app2.getPrice() == 0){
-        if(app1.getRating() < app2.getRating()){
+    if(app2.getPrice() == 0 && app1.getPrice() == 0){
+        if(app2.getRating() > app1.getRating()){
             return true;
         }
     }
     return false;
 }
 bool compareRating(const Application& app1, const Application& app2){
-    if(app1.getPrice() == 0 && app2.getPrice() != 0){
+    if(app1.getPrice() == 0){
         return false;
     }
-    else if(app1.getRating() < app2.getRating()){
+    if(app2.getRating() > app1.getRating()){
         return true;
     }
     return false;

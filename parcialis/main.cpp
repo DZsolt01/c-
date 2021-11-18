@@ -17,5 +17,7 @@ int main(){
     cout << endl;
     store.print(cout, "free");
     cout << store.size();
+    cout << endl;
+    store.print(cout, "Pycharm");
 
 }
