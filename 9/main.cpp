@@ -87,4 +87,12 @@ int main(){
     for_each(months.begin(), months.begin(), [](string &s){
        s[0] = tolower(s[0]);
     });
+
+    vector<char> abc {
+            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
+    };
+    random_shuffle(abc.begin(), abc.end());
+    sort(months.begin(), months.end(), [](const string &m1, const string &m2){
+        return m1.compare(m2);
+    });
 }
