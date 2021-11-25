@@ -84,15 +84,23 @@ int main(){
         return abs(val1) < abs(val2);
     });
 
-    for_each(months.begin(), months.begin(), [](string &s){
+    //8
+    for_each(months.begin(), months.end(), [](string &s){
        s[0] = tolower(s[0]);
     });
 
+    //9
     vector<char> abc {
-            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
+            /*'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',*/
+            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
     };
+
     random_shuffle(abc.begin(), abc.end());
-    sort(months.begin(), months.end(), [](const string &m1, const string &m2){
-        return m1.compare(m2);
+
+    sort(months.begin(), months.end(), [&abc](const string &m1, const string &m2){
+        return lexicographical_compare(m1.begin(), m1.end(), m2.begin(), m2.end(), [&abc](char c1, char c2){
+            return find(abc.begin(), abc.end(), c1) < find(abc.begin(), abc.end(), c2);
+        });
     });
+    int i =0;
 }
