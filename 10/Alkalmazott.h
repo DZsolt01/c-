@@ -12,7 +12,7 @@
 class Alkalmazott : public Szemely{
     public:
         Alkalmazott(const string &v1, const string &k1, const int &ev1, const string &munkakor);
-        virtual void print(ostream &os1) override const;
+        virtual void print(ostream &os1) const;
         int getId() const;
 
 protected:

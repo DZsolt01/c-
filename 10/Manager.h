@@ -14,7 +14,7 @@ class Manager: public Alkalmazott{
         void addAlkalmazott(Alkalmazott* alk);
         void deleteAlkalmazott(int alkalmazottId);
         int beosztottakSzama() const;
-        virtual void print(ostream &os2) override const;
+        virtual void print(ostream &os2) const;
 
     private:
         vector<Alkalmazott*> alkalmazottak;

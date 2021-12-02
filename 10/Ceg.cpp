@@ -4,9 +4,7 @@
 
 #include "Ceg.h"
 
-Ceg::Ceg(){
-
-}
+Ceg::Ceg()= default;
 
 void Ceg::addAlkalmazott(Alkalmazott *alk) {
     alkalmazottak.emplace_back(alk);
@@ -27,7 +25,19 @@ void Ceg::removeAlkalmazottFromManager(Manager* man, int id) {
 }
 
 void Ceg::print(ostream &os) const {
+    for_each(alkalmazottak.begin(), alkalmazottak.end(), [](const Alkalmazott* alk){
+        alk->print(cout);
+        cout <<endl;
+    });
+}
 
+void Ceg::printManagers() const {
+    for_each(alkalmazottak.begin(), alkalmazottak.end(), [](const Alkalmazott* alk){
+        if(dynamic_cast<const Manager*>(alk) != nullptr){
+            alk->print(cout);
+            cout <<endl;
+        }
+    });
 }
 
 

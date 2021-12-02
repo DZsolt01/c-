@@ -8,7 +8,7 @@
 #include "Manager.h"
 
 class Ceg{
-    vector<Szemely*> alkalmazottak;
+    vector<Alkalmazott*> alkalmazottak;
 
     public:
         Ceg();
