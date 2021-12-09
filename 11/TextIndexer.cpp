@@ -11,11 +11,9 @@ TextIndexer::TextIndexer(const string &fileName) {
     }
     string line;
     int lineNumber = 1;
-    bool text = false;
     while (getline (MyReadFile, line)) {
         if(line.empty()){
-            text = true;
-            continue;
+            break;
         }
         for(auto &it: line){
             it = (char)toupper(it);
@@ -24,27 +22,34 @@ TextIndexer::TextIndexer(const string &fileName) {
             }
         }
         istringstream ss(line);
-        if (!text) {
-            string indexname;
-            getline(ss, indexname);
-            index.insert(make_pair(indexname, set<int>()));
-        } else {
-            string word;
-            while(ss >> word){
-                if(index.contains(word)){
-                    index[word].insert(lineNumber);
-                }
-            }
-            lineNumber++;
+        string indexname;
+        getline(ss, indexname);
+        index.insert(make_pair(indexname, set<int>()));
+    }
+    while (getline (MyReadFile, line)) {
+        if(line.empty()){
+            break;
         }
-
+        for(auto &it: line){
+            it = (char)toupper(it);
+            if(!isupper(it)) {
+                it = ' ';
+            }
+        }
+        istringstream ss(line);
+        string word;
+        while(ss >> word){
+            if(index.contains(word)){
+                index[word].insert(lineNumber);
+            }
+        }
+        lineNumber++;
     }
     MyReadFile.close();
-}
+    }
 
 void TextIndexer::print() {
     for(auto &it: index){
-        int lastLine = 0;
         cout << it.first << ":";
         for(auto &it2: it.second){
             cout << it2 << " ";

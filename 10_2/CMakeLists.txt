@@ -12,4 +12,4 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/romanian.txt
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/hungarian.txt
         ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
 
-add_executable(10_2 Student.cpp Student.cpp Student.h GraduationExam.cpp GraduationExam.h Main.cpp GraduationInfo.cpp GraduationInfo.h IGraduation.cpp IGraduation.h)
+add_executable(10_2 Student.cpp Student.cpp Student.h GraduationExam.cpp GraduationExam.h Main.cpp GraduationInfo.cpp GraduationInfo.h IGraduation.h)
