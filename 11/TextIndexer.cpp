@@ -51,8 +51,25 @@ TextIndexer::TextIndexer(const string &fileName) {
 void TextIndexer::print() {
     for(auto &it: index){
         cout << it.first << ":";
+        int first = *it.second.begin();
+        int stepper = *it.second.begin();
+        bool x = false;
         for(auto &it2: it.second){
-            cout << it2 << " ";
+            if(it2 - stepper == 1){
+                stepper++;
+                x = true;
+            }
+            if(x && it2 != stepper){
+                cout << "-" << stepper;
+                first = it2;
+                stepper = it2;
+                x =false;
+            }
+            if(stepper == first && !x){
+                cout <<" " << it2;
+                first = it2;
+                stepper = it2;
+            }
         }
         cout << endl;
     }

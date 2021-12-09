@@ -7,4 +7,6 @@
 int main(){
     TextIndexer textIndexer("index.txt");
     textIndexer.print();
+    TextIndexer textIndexer1("bible.txt");
+    textIndexer1.print();
 }
