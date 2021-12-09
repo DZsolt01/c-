@@ -41,13 +41,12 @@ double Student::getGrade(string &name) const {
 void Student::computeAverage() {
     double avg = 0;
     for(auto &p: grades){
-        if(p.second < 5){
-            avg = 0;
-            break;
-        }
         avg += p.second;
     }
-    this->average = avg/grades.size();
+    avg = avg/grades.size();
+    if(avg >= 6){
+        this->average = avg;
+    }
 }
 
 ostream &operator<<(ostream &os, const Student &student) {

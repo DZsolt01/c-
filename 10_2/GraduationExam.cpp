@@ -4,7 +4,7 @@
 
 #include "GraduationExam.h"
 
-void GraduationExam::enrollment(string &filename) {
+void GraduationExam::enrollment(const string &filename) {
     ifstream MyReadFile(filename);
     if (!MyReadFile) {
         throw runtime_error("ERROR1!");
@@ -31,7 +31,7 @@ int GraduationExam::numStudents() const {
     return students.size();
 }
 
-void GraduationExam::readGradesOfSubject(string &filename, string &subject){
+void GraduationExam::readGradesOfSubject(const string &subject, const string &filename){
     ifstream MyReadFile(filename);
     if(!MyReadFile){
         throw runtime_error("ERROR2!");
@@ -51,28 +51,21 @@ void GraduationExam::readGradesOfSubject(string &filename, string &subject){
     MyReadFile.close();
 }
 
-void GraduationExam::computeFinalGrades() const {
-    for_each(students.begin(), students.end(), [](const pair<int, Student> &p){
-        double avg = 0;
-        for_each(p.second.getGrades().begin(), p.second.getGrades().end(), [&avg](const pair<string, double> &p2){
-            avg += p2.second;
-        });
-        cout << p.first << ":" << avg << endl;
+void GraduationExam::computeFinalGrades() {
+    for_each(students.begin(), students.end(), [](pair<const int, Student> &p){
+        p.second.computeAverage();
     });
 }
 
-map<string, double> GraduationExam::getGrades(int) const {
-    return map<string, double>();
+map<string, double> GraduationExam::getGrades(int id) const {
+
+    return students.at(id).getGrades();
 }
 
 int GraduationExam::numPassed() const {
     int succes = 0;
     for_each(students.begin(), students.end(), [&succes](const pair<int, Student> &p){
-        double avg = 0;
-        for_each(p.second.getGrades().begin(), p.second.getGrades().end(), [&avg](const pair<string, double> &p2){
-            avg += p2.second;
-        });
-        if(avg > 5){
+        if(p.second.getAverage() > 6){
             succes++;
         }
     });

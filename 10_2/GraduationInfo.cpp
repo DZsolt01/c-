@@ -7,46 +7,56 @@
 GraduationInfo::GraduationInfo(GraduationExam &graduationExam) : graduationExam(graduationExam) {
 }
 
-int GraduationInfo::getNumEnRolled () const {
-    return 0;
+int GraduationInfo::getNumEnrolled () const {
+    return graduationExam.students.size();
 }
 
 int GraduationInfo::getNumPassed() const {
-    return 0;
+    return graduationExam.numPassed();
 }
 
 int GraduationInfo::getNumFailed() const {
-    return 0;
+    return graduationExam.numStudents() - graduationExam.numPassed();
 }
 
-Student GraduationInfo::getStudent(int id) const{
-    return Student(0, __cxx11::basic_string(), __cxx11::basic_string());
+Student& GraduationInfo::getStudent(int id) const{
+    return graduationExam.students.at(id);
 }
 
 string GraduationInfo::getFirstname(int id) const{
-    return std::string();
+    return getStudent(id).getFirstName();
 }
 
-string GraduationInfo::getLastName(int id) {
-    return std::string();
+string GraduationInfo::getLastName(int id) const{
+    return getStudent(id).getLastName();
 }
 
-double GraduationInfo::getAverage(int) const {
-    return 0;
+double GraduationInfo::getAverage(int id) const {
+    return getStudent(id).getAverage();
 }
 
-map<string, double> GraduationInfo::getResult(int) {
-    return map<string, double>();
+map<string, double> GraduationInfo::getResult(int id) const{
+    return getStudent(id).getGrades();
 }
 
-void GraduationInfo::printResults(ostream &) {
-
+void GraduationInfo::printResults(ostream &os) const {
+    for_each(graduationExam.students.begin(), graduationExam.students.end(), [](const pair<int, Student> &p){
+            cout << p.second;
+    });
 }
 
-void GraduationInfo::printPassed(ostream &) {
-
+void GraduationInfo::printPassed(ostream &os) const {
+    for_each(graduationExam.students.begin(), graduationExam.students.end(), [](const pair<int, Student> &p){
+        if(p.second.getAverage() > 6){
+            cout << p.second;
+        }
+    });
 }
 
-void GraduationInfo::printFailed(ostream &) {
-
+void GraduationInfo::printFailed(ostream &os) const {
+    for_each(graduationExam.students.begin(), graduationExam.students.end(), [](const pair<int, Student> &p){
+        if(p.second.getAverage() < 6){
+            cout << p.second;
+        }
+    });
 }

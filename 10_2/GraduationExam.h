@@ -16,13 +16,13 @@ class GraduationExam{
     map<int, Student> students;
     friend class GraduationInfo;
 public:
-    void enrollment(string&);
+    void enrollment(const string&);
 
     int numStudents() const;
 
-    void readGradesOfSubject(string&, string&);
+    void readGradesOfSubject(const string&, const string&);
 
-    void computeFinalGrades() const;
+    void computeFinalGrades();
 
     map<string, double> getGrades(int) const;
 

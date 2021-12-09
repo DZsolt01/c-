@@ -63,7 +63,7 @@ void TextIndexer::print() {
                 cout << "-" << stepper;
                 first = it2;
                 stepper = it2;
-                x =false;
+                x = false;
             }
             if(stepper == first && !x){
                 cout <<" " << it2;
